@@ -9,7 +9,9 @@ public class Exercises {
         complete the method below, so it will validate an email address
      */
     public boolean validateEmail(String email) {
-        String regex = ""; // todo
+        String regex = "";
+        regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
 
@@ -22,7 +24,14 @@ public class Exercises {
         if there's no match for a date, return null
      */
     public String findDate(String string) {
-        // todo
+        String regex = "\\b(\\d{1,2})[-/.](\\d{1,2})[-/.](\\d{4})\\b|\\b(\\d{4})[-/.](\\d{1,2})[-/.](\\d{1,2})\\b"; // todo
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+
+        if (matcher.find()) {
+            return matcher.group();
+        }
+
         return null;
     }
 
@@ -37,7 +46,16 @@ public class Exercises {
         - has no white-space in it
      */
     public int findValidPasswords(String string) {
-        // todo
+        String regex = "\\b(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*])(?!.*\\s)[A-Za-z\\d!@#$%^&*]{8,}\\b"; // todo
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+
+        int count = 0;
+
+        while (matcher.find()) {
+            count++;
+        }
+
         return -1;
     }
 
@@ -49,7 +67,19 @@ public class Exercises {
      */
     public List<String> findPalindromes(String string) {
         List<String> list = new ArrayList<>();
-        // todo
+        String regex = "\\b[a-zA-Z]{3,}\\b"; // حداقل 3 حرفی بدون فاصله
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(string);
+
+        while (matcher.find()) {
+            String word = matcher.group();
+            String reversed = new StringBuilder(word).reverse().toString();
+
+            if (word.equalsIgnoreCase(reversed)) {
+                list.add(word);
+            }
+        }
+
         return list;
     }
 
